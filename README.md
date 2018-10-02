@@ -1,2 +1,2 @@
 # user-registration
-test user registration application using Spring Boot, Hibernate, Spring Data JPA
+User registration application using Spring Boot, Hibernate, Spring Data JPA
