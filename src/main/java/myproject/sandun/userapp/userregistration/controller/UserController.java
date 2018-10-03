@@ -39,5 +39,9 @@ public class UserController {
         userService.deleteUser(user);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/course/{id}/users")
+    public List<User> getUsersByCourse(@PathVariable Long id) {
+        return userService.getUsersByCourse(id);
+    }
 
 }

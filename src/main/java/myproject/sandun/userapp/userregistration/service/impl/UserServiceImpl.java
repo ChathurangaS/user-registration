@@ -46,4 +46,14 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    @Override
+    public List<User> getUsersByCourse(Long id) {
+        List<User> userList = userRepository.findByCourseId(id);
+        userList.forEach(user -> {
+            if (user.getCourse() != null && user.getCourse().getUserList() != null) {
+                user.getCourse().setUserList(null);
+            }
+        });
+        return userList;
+    }
 }

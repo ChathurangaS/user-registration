@@ -2,9 +2,10 @@ package myproject.sandun.userapp.userregistration.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "user_details")
+@Table(name = "user")
 //@Audited
 public class User {
 
@@ -16,9 +17,6 @@ public class User {
     @Column(name = "name_")
     private String name;
 
-//    @Column(name = "address_")
-//    private String address;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "birth_day_")
     private Date birthDay;
@@ -28,9 +26,14 @@ public class User {
     private Date currentTime;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "course_id")
 //    @JsonIgnore
     private Course course;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+    @JoinTable(name = "user_subject", joinColumns = @JoinColumn(name = "user_id_"), inverseJoinColumns = @JoinColumn(name = "subject_id_"))
+    private Set<Subject> subjectList;
+
 
     public User() {
     }
@@ -41,6 +44,15 @@ public class User {
         this.birthDay = birthDay;
         this.currentTime = currentTime;
         this.course = course;
+    }
+
+    public User(Long id, String name, Date birthDay, Date currentTime, Course course, Set<Subject> subjectList) {
+        this.id = id;
+        this.name = name;
+        this.birthDay = birthDay;
+        this.currentTime = currentTime;
+        this.course = course;
+        this.subjectList = subjectList;
     }
 
     public Long getId() {
@@ -58,15 +70,6 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public String getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(String address) {
-//        this.address = address;
-//    }
-
 
     public Date getBirthDay() {
         return birthDay;
@@ -90,5 +93,13 @@ public class User {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public Set<Subject> getSubjectList() {
+        return subjectList;
+    }
+
+    public void setSubjectList(Set<Subject> subjectList) {
+        this.subjectList = subjectList;
     }
 }

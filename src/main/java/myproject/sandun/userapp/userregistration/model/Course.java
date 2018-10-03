@@ -29,6 +29,11 @@ public class Course {
         this.id = id;
     }
 
+    public Course(String courseName, String courseDescription) {
+        this.courseName = courseName;
+        this.courseDescription = courseDescription;
+    }
+
     public Course(Long id, String courseName, String courseDescription) {
         this.id = id;
         this.courseName = courseName;
